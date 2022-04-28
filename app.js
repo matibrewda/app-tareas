@@ -1,5 +1,5 @@
-let archivoTareas = require('./funcionesDeTareas').archivoTareas;
-let escribirJSON = require('./funcionesDeTareas').escribirJSON;
+let funcionesDeTareas = require('./funcionesDeTareas');
+
 
 //Si desea investigar un poco más sobre este módulo nativo de NodeJs
 //https://nodejs-es.github.io/api/process.html#process_es_process 
@@ -9,7 +9,7 @@ switch(accion) {
     case 'listar':
         console.log('Listado de tareas');
         console.log('------------------');
-        let tareas = archivoTareas.leerArchivo();
+        let tareas = funcionesDeTareas.leerArchivo();
         tareas.forEach(listarTareas);
         function listarTareas(item,index){
             console.log((index+1) +'. ' + item.titulo + ' - ' + item.estado);
@@ -18,9 +18,9 @@ switch(accion) {
         break;
         case 'crear':
 
-            let tareasNuevas = [{titulo : 'Aprender GIT',estado : 'pendiente'},]
-            let tareasviejas = archivoTareas.leerArchivo();
-            let datosAgregados = archivoTareas.escribirArchivo(tareasNuevas,tareasviejas);
+            let tareasNuevas = {titulo :'Aprender GIT',estado : 'pendiente'}
+            let tareasviejas = funcionesDeTareas.leerArchivo();
+            let datosAgregados = funcionesDeTareas.escribirArchivo(JSON.stringify(tareasNuevas),JSON.stringify(tareasviejas));
             console.log(datosAgregados)
     
             break;   
